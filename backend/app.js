@@ -1,12 +1,11 @@
+require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const bookRoutes = require("./routes/book");
 
 mongoose
-  .connect(
-    "mongodb+srv://vercane:verc4ne@mon-vieux-grimoire.hwxcxge.mongodb.net/?retryWrites=true&w=majority&appName=mon-vieux-grimoire"
-  )
+  .connect(process.env.MONGO_DB)
   .then(() => console.log("Connexion à MongoDB réussie !"))
   .catch((error) => console.log("Connexion à MongoDB échouée !", error));
 
