@@ -1,7 +1,7 @@
-import React from "react";
-import { useBestRatedBooks } from "../../../lib/customHooks";
-import BookItem from "../BookItem/BookItem";
-import styles from "./BestRatedBooks.module.css";
+import React from 'react';
+import { useBestRatedBooks } from '../../../lib/customHooks';
+import BookItem from '../BookItem/BookItem';
+import styles from './BestRatedBooks.module.css';
 
 function BestRatedBooks() {
   const { bestRatedBooks } = useBestRatedBooks();

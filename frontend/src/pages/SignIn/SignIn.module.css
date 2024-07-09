@@ -38,12 +38,12 @@
 .Form label {
   display: flex;
   flex-direction: column;
-  font-family: "DM Sans", sans-serif;
+  font-family: 'DM Sans', sans-serif;
   font-size: 18px;
   line-height: 24px;
 }
 
-.Form input[type="file"] {
+.Form input[type='file'] {
   display: none;
 }
 

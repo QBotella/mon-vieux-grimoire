@@ -1,12 +1,12 @@
-import React, { useState } from "react";
-import axios from "axios";
-import * as PropTypes from "prop-types";
-import { useNavigate } from "react-router-dom";
-import { API_ROUTES, APP_ROUTES } from "../../utils/constants";
-import { useUser } from "../../lib/customHooks";
-import { storeInLocalStorage } from "../../lib/common";
-import { ReactComponent as Logo } from "../../images/Logo.svg";
-import styles from "./SignIn.module.css";
+import React, { useState } from 'react';
+import axios from 'axios';
+import * as PropTypes from 'prop-types';
+import { useNavigate } from 'react-router-dom';
+import { API_ROUTES, APP_ROUTES } from '../../utils/constants';
+import { useUser } from '../../lib/customHooks';
+import { storeInLocalStorage } from '../../lib/common';
+import { ReactComponent as Logo } from '../../images/Logo.svg';
+import styles from './SignIn.module.css';
 
 function SignIn({ setUser }) {
   const navigate = useNavigate();
@@ -15,18 +15,18 @@ function SignIn({ setUser }) {
     navigate(APP_ROUTES.DASHBOARD);
   }
 
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [notification, setNotification] = useState({
     error: false,
-    message: "",
+    message: '',
   });
   const signIn = async () => {
     try {
       setIsLoading(true);
       const response = await axios({
-        method: "post",
+        method: 'post',
         url: API_ROUTES.SIGN_IN,
         data: {
           email,
@@ -34,17 +34,17 @@ function SignIn({ setUser }) {
         },
       });
       if (!response?.data?.token) {
-        setNotification({ error: true, message: "Une erreur est survenue" });
-        console.log("Something went wrong during signing in: ", response);
+        setNotification({ error: true, message: 'Une erreur est survenue' });
+        console.log('Something went wrong during signing in: ', response);
       } else {
         storeInLocalStorage(response.data.token, response.data.userId);
         setUser(response.data);
-        navigate("/");
+        navigate('/');
       }
     } catch (err) {
       console.log(err);
       setNotification({ error: true, message: err.message });
-      console.log("Some error occured during signing in: ", err);
+      console.log('Some error occured during signing in: ', err);
     } finally {
       setIsLoading(false);
     }
@@ -54,7 +54,7 @@ function SignIn({ setUser }) {
     try {
       setIsLoading(true);
       const response = await axios({
-        method: "POST",
+        method: 'POST',
         url: API_ROUTES.SIGN_UP,
         data: {
           email,
@@ -62,16 +62,16 @@ function SignIn({ setUser }) {
         },
       });
       if (!response?.data) {
-        console.log("Something went wrong during signing up: ", response);
+        console.log('Something went wrong during signing up: ', response);
         return;
       }
       setNotification({
         error: false,
-        message: "Votre compte a bien été créé, vous pouvez vous connecter",
+        message: 'Votre compte a bien été créé, vous pouvez vous connecter',
       });
     } catch (err) {
       setNotification({ error: true, message: err.message });
-      console.log("Some error occured during signing up: ", err);
+      console.log('Some error occured during signing up: ', err);
     } finally {
       setIsLoading(false);
     }

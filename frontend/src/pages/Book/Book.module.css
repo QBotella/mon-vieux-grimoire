@@ -18,7 +18,7 @@
   height: 1px;
 }
 .Deleted {
-  font-family: "Libre Baskerville", serif;
+  font-family: 'Libre Baskerville', serif;
   padding-block: 5em;
   background-color: #ffffff;
   margin: auto;
@@ -118,20 +118,20 @@
 }
 
 .Book form p {
-  font-family: "Libre Baskerville", serif;
+  font-family: 'Libre Baskerville', serif;
   font-size: 18px;
   margin-bottom: 22px;
 }
 
-.Book form input[type="radio"] {
+.Book form input[type='radio'] {
   position: absolute;
   left: -10000px;
 }
-.Book form input[type="submit"] {
+.Book form input[type='submit'] {
   padding: 20px 23px;
   border: none;
   background-color: #d9a963;
-  font-family: "DM Sans", sans-serif;
+  font-family: 'DM Sans', sans-serif;
   font-size: 16px;
 }
 .Stars,
@@ -141,7 +141,7 @@
 }
 .Owner {
   color: #2c1810;
-  font-family: "DM Sans", sans-serif;
+  font-family: 'DM Sans', sans-serif;
   padding: 20px;
 }
 

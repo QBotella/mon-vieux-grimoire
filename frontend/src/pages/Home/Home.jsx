@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import BookItem from "../../components/Books/BookItem/BookItem";
-import Banner from "../../images/home_banner.jpg";
-import styles from "./Home.module.css";
-import { getBooks } from "../../lib/common";
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import BookItem from '../../components/Books/BookItem/BookItem';
+import Banner from '../../images/home_banner.jpg';
+import styles from './Home.module.css';
+import { getBooks } from '../../lib/common';
 
 function Home() {
   const [books, setBooks] = useState(null);

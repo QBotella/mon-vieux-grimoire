@@ -19,20 +19,20 @@
 }
 
 .BookRatingForm form p {
-  font-family: "Libre Baskerville", serif;
+  font-family: 'Libre Baskerville', serif;
   font-size: 18px;
   margin-bottom: 22px;
 }
 
-.BookRatingForm form input[type="radio"] {
+.BookRatingForm form input[type='radio'] {
   position: absolute;
   left: -10000px;
 }
-.BookRatingForm form input[type="submit"] {
+.BookRatingForm form input[type='submit'] {
   padding: 20px 23px;
   border: none;
   background-color: #d9a963;
-  font-family: "DM Sans", sans-serif;
+  font-family: 'DM Sans', sans-serif;
   font-size: 16px;
 }
 

@@ -18,7 +18,7 @@
 .BookItem h2 {
   font-size: 18px;
   font-weight: 700;
-  font-family: "Libre Baskerville", serif;
+  font-family: 'Libre Baskerville', serif;
   margin-bottom: 10px;
 }
 
@@ -31,11 +31,11 @@
 .BookItem h3 {
   font-size: 18px;
   font-weight: 700;
-  font-family: "Libre Baskerville", serif;
+  font-family: 'Libre Baskerville', serif;
   margin-bottom: 10px;
 }
 .BookItem p {
-  font-family: "DM Sans", sans-serif;
+  font-family: 'DM Sans', sans-serif;
   font-size: 14px;
   color: #796157;
   margin-bottom: 10px;

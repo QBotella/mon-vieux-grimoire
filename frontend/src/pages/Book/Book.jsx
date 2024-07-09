@@ -1,15 +1,15 @@
 /* eslint-disable react/jsx-props-no-spreading */
 
-import React, { useEffect, useState } from "react";
-import { useParams, Link } from "react-router-dom";
-import { useUser } from "../../lib/customHooks";
-import styles from "./Book.module.css";
-import { getBook, deleteBook } from "../../lib/common";
-import BookInfo from "../../components/Books/BookInfo/BookInfo";
-import BookRatingForm from "../../components/Books/BookRatingForm/BookRatingForm";
-import BookDeleteImage from "../../images/book_delete.png";
-import BestRatedBooks from "../../components/Books/BestRatedBooks/BestRatedBooks";
-import BackArrow from "../../components/BackArrow/BackArrow";
+import React, { useEffect, useState } from 'react';
+import { useParams, Link } from 'react-router-dom';
+import { useUser } from '../../lib/customHooks';
+import styles from './Book.module.css';
+import { getBook, deleteBook } from '../../lib/common';
+import BookInfo from '../../components/Books/BookInfo/BookInfo';
+import BookRatingForm from '../../components/Books/BookRatingForm/BookRatingForm';
+import BookDeleteImage from '../../images/book_delete.png';
+import BestRatedBooks from '../../components/Books/BestRatedBooks/BestRatedBooks';
+import BackArrow from '../../components/BackArrow/BackArrow';
 
 function Book() {
   const { connectedUser, userLoading } = useUser();
@@ -50,11 +50,11 @@ function Book() {
   }, [book, userLoading]);
 
   const onDelete = async (e) => {
-    if (e.key && e.key !== "Enter") {
+    if (e.key && e.key !== 'Enter') {
       return;
     }
     // eslint-disable-next-line no-restricted-globals
-    const check = confirm("Etes vous sûr de vouloir supprimer ce livre ?");
+    const check = confirm('Etes vous sûr de vouloir supprimer ce livre ?');
     if (check) {
       const del = await deleteBook(book.id);
       if (del) {
@@ -78,7 +78,7 @@ function Book() {
               <div className={styles.Owner}>
                 <p>Vous avez publié cet ouvrage, vous pouvez le :</p>
                 <p>
-                  <Link to={`/livre/modifier/${book.id}`}>modifier</Link>{" "}
+                  <Link to={`/livre/modifier/${book.id}`}>modifier</Link>{' '}
                   <span
                     tabIndex={0}
                     role="button"
@@ -86,7 +86,7 @@ function Book() {
                     onClick={onDelete}
                   >
                     supprimer
-                  </span>{" "}
+                  </span>{' '}
                 </p>
               </div>
             ) : null}

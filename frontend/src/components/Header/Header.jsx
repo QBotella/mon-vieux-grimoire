@@ -1,16 +1,16 @@
-import React from "react";
-import { NavLink, useNavigate } from "react-router-dom";
+import React from 'react';
+import { NavLink, useNavigate } from 'react-router-dom';
 
-import * as PropTypes from "prop-types";
-import styles from "./Header.module.css";
-import Logo from "../../images/Logo.png";
+import * as PropTypes from 'prop-types';
+import styles from './Header.module.css';
+import Logo from '../../images/Logo.png';
 
 function Header({ user, setUser }) {
   const navigate = useNavigate();
   const disconnect = () => {
     localStorage.clear();
     setUser(null);
-    navigate("/");
+    navigate('/');
   };
 
   return (

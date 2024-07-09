@@ -135,7 +135,7 @@ body {
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
 
@@ -162,13 +162,13 @@ code {
   display: block;
   margin-bottom: 5em;
   color: #796157;
-  font-family: "DM Sans", sans-serif;
+  font-family: 'DM Sans', sans-serif;
 
   text-decoration: none;
 }
 
 h1 {
-  font-family: "Libre Baskerville", serif;
+  font-family: 'Libre Baskerville', serif;
   font-size: 44px;
   font-style: italic;
   color: #796157;
