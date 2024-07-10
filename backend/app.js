@@ -3,6 +3,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const bookRoutes = require("./routes/book");
+const userRoutes = require('./routes/user')
 
 mongoose
   .connect(process.env.MONGO_DB)
@@ -15,5 +16,6 @@ app.use(cors()); // Utilisation du middleware cors
 app.use(express.json()); // Middleware pour parser les requêtes JSON
 
 app.use("/api/books", bookRoutes);
+app.use("/api/auth", userRoutes)
 
 module.exports = app;
