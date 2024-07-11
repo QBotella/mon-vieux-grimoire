@@ -83,29 +83,42 @@ exports.getAllBook = (req, res, next) => {
 };
 
 exports.createRating = (req, res, next) => {
-  const { userId, grade } = req.body;
+  const bookId = req.params.id;
+  const userId = req.body.userId;
+  const grade = req.body.grade;
 
-  if (grade < 0 || grade > 5) {
-    return res.status(400).json({ error: 'La note doit être comprise entre 0 et 5.' });
-  }
-
-  Book.findOne({ _id: req.params.id })
-    .then(book => {
+  Book.findOne({ _id: bookId })
+    .then((book) => {
       if (!book) {
-        return res.status(404).json({ error: 'Livre non trouvé.' });
+        return res.status(404).json({ message: 'Livre non trouvé' });
       }
 
-      const existingRating = book.rating.find(r => r.userId === userId);
+      const existingRating = book.rating.find((r) => r.userId === userId);
+
       if (existingRating) {
-        return res.status(400).json({ error: 'L\'utilisateur a déjà noté ce livre.' });
+        existingRating.grade = grade;
+      } else {
+        book.rating.push({ userId, grade });
       }
 
-      book.rating.push({ userId, grade });
-      book.averageRating = (book.rating.reduce((sum, r) => sum + r.grade, 0) / book.rating.length).toFixed(2);
+      const totalRatings = book.rating.reduce((sum, rating) => sum + rating.grade, 0);
+      book.averageRating = totalRatings / book.rating.length;
 
       book.save()
-        .then(() => res.status(200).json(book))
-        .catch(error => res.status(400).json({ error }));
+        .then(() => res.status(200).json({ message: 'Note ajouté' }))
+        .catch((error) => res.status(400).json({ error }));
     })
-    .catch(error => res.status(500).json({ error }));
+    .catch((error) => res.status(400).json({ error }));
+};
+
+exports.getBestratingBook = (req, res, next) => {
+  Book.find()
+    .sort({ averageRating: -1 })
+    .limit(3) 
+    .then((books) => {
+      res.status(200).json(books);
+    })
+    .catch((error) => {
+      res.status(400).json({ error });
+    });
 };
