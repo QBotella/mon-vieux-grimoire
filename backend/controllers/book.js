@@ -76,8 +76,8 @@ exports.getOneBook = (req, res, next) => {
 
 exports.getAllBook = (req, res, next) => {
   Book.find()
-    .then((things) => {
-      res.status(200).json(things);
+    .then((book) => {
+      res.status(200).json(book);
     })
     .catch((error) => {
       res.status(400).json({
@@ -85,3 +85,7 @@ exports.getAllBook = (req, res, next) => {
       });
     });
 };
+
+exports.getBestratingBook = (req, res, next) => {
+  
+}
