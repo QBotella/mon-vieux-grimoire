@@ -16,6 +16,7 @@ app.use(cors()); // Utilisation du middleware cors
 app.use(express.json()); // Middleware pour parser les requêtes JSON
 
 app.use("/api/books", bookRoutes);
-app.use("/api/auth", userRoutes)
+app.use("/api/auth", userRoutes);
+app.use('/images', express.static(path.join(__dirname, 'images')))
 
 module.exports = app;
