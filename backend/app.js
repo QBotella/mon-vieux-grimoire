@@ -2,6 +2,8 @@ require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
+const path = require('path');
+
 const bookRoutes = require("./routes/book");
 const userRoutes = require('./routes/user')
 
@@ -12,8 +14,8 @@ mongoose
 
 const app = express();
 
-app.use(cors()); // Utilisation du middleware cors
-app.use(express.json()); // Middleware pour parser les requêtes JSON
+app.use(cors()); 
+app.use(express.json());
 
 app.use("/api/books", bookRoutes);
 app.use("/api/auth", userRoutes);
