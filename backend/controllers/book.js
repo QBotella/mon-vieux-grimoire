@@ -117,7 +117,6 @@ exports.getBestRatingBooks = (req, res, next) => {
     .sort({ averageRating: -1 })
     .limit(3)
     .then((books) => {
-      console.log({ books });
       res.status(200).json(books);
     })
     .catch((error) => {
