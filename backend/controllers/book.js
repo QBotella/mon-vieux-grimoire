@@ -1,11 +1,25 @@
 const fs = require("fs");
 const Book = require("../models/Book");
-const { log } = require("console");
 
 exports.createBook = (req, res, next) => {
-  const bookObject = JSON.parse(req.body.book);
+  let bookObject;
+
+  try {
+    bookObject = JSON.parse(req.body.book);
+  } catch (error) {
+    return res.status(400).json({ message: "Le format du livre est invalide." });
+  }
+
+  if (isNaN(bookObject.ratings[0].grade) || bookObject.ratings[0].grade < 0 || bookObject.ratings[0].grade > 5) {
+    return res.status(403).json({ message: "La note doit être comprise entre 0 et 5." });
+  }
+  
+  if (isNaN(bookObject.averageRating) || bookObject.averageRating < 0 || bookObject.averageRating > 5) {
+    return res.status(403).json({ message: "La note moyenne doit être entre 1 & 5." });
+  }
+
   delete bookObject._id;
-  delete bookObject._userId;
+
   const book = new Book({
     ...bookObject,
     userId: req.auth.userId,
@@ -17,20 +31,30 @@ exports.createBook = (req, res, next) => {
   book
     .save()
     .then(() => res.status(201).json({ message: "Livre enregistré !" }))
-    .catch((error) => res.status(400).json({ error }));
+    .catch((error) => {
+      console.error(error);
+      res.status(400).json({ error })
+    });
 };
 
 exports.modifyBook = (req, res, next) => {
-  const bookObject = req.file
-    ? {
-        ...JSON.parse(req.body.book),
-        imageUrl: `${req.protocol}://${req.get("host")}/images/${
-          req.file.filename
-        }`,
-      }
-    : { ...req.body };
+  let bookObject;
+  
+  try {
+    bookObject = req.file
+      ? {
+          ...JSON.parse(req.body.book),
+          imageUrl: `${req.protocol}://${req.get("host")}/images/${req.file.filename}`,
+        }
+      : { ...req.body };
+  } catch (error) {
+    return res.status(400).json({ message: "Le format du livre est invalide." });
+  }
 
-  delete bookObject._userId;
+  delete bookObject.rating;
+  delete bookObject.averageRating;
+
+  delete bookObject.userId;
   Book.findOne({ _id: req.params.id })
     .then((book) => {
       if (book.userId !== req.auth.userId) {
@@ -64,7 +88,12 @@ exports.deleteBook = (req, res, next) => {
 
 exports.getOneBook = (req, res, next) => {
   Book.findOne({ _id: req.params.id })
-    .then((book) => res.status(200).json(book))
+    .then((book) => {
+      if (!book) {
+        return res.status(404).json({ message: "Livre non trouvé" });
+      }
+      res.status(200).json(book);
+    })
     .catch((error) => res.status(404).json({ error }));
 };
 
@@ -80,7 +109,7 @@ exports.createRating = (req, res, next) => {
   const grade = parseInt(req.body.rating, 10);
 
   if (isNaN(grade) || grade < 0 || grade > 5) {
-    return res.status(400).json({ message: "La note doit être comprise entre 0 et 5." });
+    return res.status(403).json({ message: "La note doit être comprise entre 0 et 5." });
   }
 
   Book.findOne({ _id: bookId })
