@@ -30,7 +30,7 @@ const processImage = (req, res, next) => {
     return next();
   }
 
-  const name = req.file.originalname.split(' ').join('_');
+  const name = req.file.originalname.replace(/ /g, '_').replace(/\//g, '_');
   const removeExtension = name.split('.')[0];
   const extension = MIME_TYPES[req.file.mimetype];
   const filename = `${removeExtension}_${Date.now()}.${extension}`;
